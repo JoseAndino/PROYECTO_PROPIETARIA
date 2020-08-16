@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CONTABILIDAD2.entrada_contable>
+
+@{
+    ViewBag.Title = "Entradas contables";
+}
+
+<h2>Entradas contables</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", " ", new { @class = "btn btn-info" })
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.auxiliar_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.moneda_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+
+            <th>
+                Opciones
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.auxiliar_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.moneda_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-warning" }) 
+                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-info" }) 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+</table>

@@ -1,0 +1,74 @@
+﻿@model CONTABILIDAD2.cuenta_contable
+
+@{
+    ViewBag.Title = "Detalles de la cuenta contable";
+}
+
+<h2>Detalles de las cuentas contables</h2>
+
+<div>
+    <h4>cuenta_contable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permite_transaccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permite_transaccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nivel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nivel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cuenta_mayor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cuenta_mayor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_cuenta.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_cuenta.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

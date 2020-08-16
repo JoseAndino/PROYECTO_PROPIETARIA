@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="CONTABILIDAD2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+        <EntityType Name="auxiliarr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="130" Type="varchar" />
+          <Property Name="estado" Nullable="false" Type="bit" />
+        </EntityType>
+        <EntityType Name="cuenta_contable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="130" Type="varchar" />
+          <Property Name="permite_transaccion" Nullable="false" Type="bit" />
+          <Property Name="tipo_cuenta_id" Nullable="false" Type="int" />
+          <Property Name="nivel" Nullable="false" Type="int" />
+          <Property Name="cuenta_mayor" Nullable="false" Type="int" />
+          <Property Name="balance" Nullable="false" Type="float" />
+          <Property Name="estado" Nullable="false" Type="bit" />
+        </EntityType>
+        <EntityType Name="detalle_entrada_contable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" Type="int" />
+          <Property Name="entrada_contable_id" Nullable="false" Type="int" />
+          <Property Name="cuenta_contable_id" Nullable="false" Type="int" />
+          <Property Name="tipo_movimiento" Nullable="false" MaxLength="2" Type="varchar" />
+          <Property Name="monto" Nullable="false" Type="float" />
+          <Property Name="estado" Nullable="false" Type="bit" />
+        </EntityType>
+        <EntityType Name="entrada_contable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="130" Type="varchar" />
+          <Property Name="auxiliar_id" Nullable="false" Type="int" />
+          <Property Name="moneda_id" Nullable="false" Type="int" />
+          <Property Name="estado" Nullable="false" Type="bit" />
+        </EntityType>
+        <EntityType Name="monedaa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="130" Type="varchar" />
+          <Property Name="tasa" Nullable="false" Type="float" />
+          <Property Name="estado" Nullable="false" Type="bit" />
+        </EntityType>
+        <EntityType Name="tipo_cuenta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="130" Type="varchar" />
+          <Property Name="origen" Nullable="false" MaxLength="2" Type="varchar" />
+          <Property Name="estado" Nullable="false" Type="bit" />
+        </EntityType>
+        <Association Name="cuenta_contable_tipo_cuenta_id_fk">
+          <End Type="Self.tipo_cuenta" Multiplicity="1" Role="tipo_cuenta" />
+          <End Type="Self.cuenta_contable" Multiplicity="*" Role="cuenta_contable" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cuenta_contable">
+              <PropertyRef Name="tipo_cuenta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="detalle_entrada_contable_cuenta_contable_id_fk">
+          <End Type="Self.cuenta_contable" Multiplicity="1" Role="cuenta_contable" />
+          <End Type="Self.detalle_entrada_contable" Multiplicity="*" Role="detalle_entrada_contable" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta_contable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_entrada_contable">
+              <PropertyRef Name="cuenta_contable_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="detalle_entrada_contable_entrada_contable_id_fk">
+          <End Type="Self.entrada_contable" Multiplicity="1" Role="entrada_contable" />
+          <End Type="Self.detalle_entrada_contable" Multiplicity="*" Role="detalle_entrada_contable" />
+          <ReferentialConstraint>
+            <Principal Role="entrada_contable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_entrada_contable">
+              <PropertyRef Name="entrada_contable_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CONTABILIDAD2ModelStoreContainer">
+          <EntitySet Name="auxiliarr" EntityType="Self.auxiliarr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cuenta_contable" EntityType="Self.cuenta_contable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalle_entrada_contable" EntityType="Self.detalle_entrada_contable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="entrada_contable" EntityType="Self.entrada_contable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="monedaa" EntityType="Self.monedaa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_cuenta" EntityType="Self.tipo_cuenta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="cuenta_contable_tipo_cuenta_id_fk" Association="Self.cuenta_contable_tipo_cuenta_id_fk">
+            <End EntitySet="tipo_cuenta" Role="tipo_cuenta" />
+            <End EntitySet="cuenta_contable" Role="cuenta_contable" />
+          </AssociationSet>
+          <AssociationSet Name="detalle_entrada_contable_cuenta_contable_id_fk" Association="Self.detalle_entrada_contable_cuenta_contable_id_fk">
+            <End EntitySet="cuenta_contable" Role="cuenta_contable" />
+            <End EntitySet="detalle_entrada_contable" Role="detalle_entrada_contable" />
+          </AssociationSet>
+          <AssociationSet Name="detalle_entrada_contable_entrada_contable_id_fk" Association="Self.detalle_entrada_contable_entrada_contable_id_fk">
+            <End EntitySet="entrada_contable" Role="entrada_contable" />
+            <End EntitySet="detalle_entrada_contable" Role="detalle_entrada_contable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CONTABILIDAD2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="auxiliarr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cuenta_contable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="permite_transaccion" Type="Boolean" Nullable="false" />
+          <Property Name="tipo_cuenta_id" Type="Int32" Nullable="false" />
+          <Property Name="nivel" Type="Int32" Nullable="false" />
+          <Property Name="cuenta_mayor" Type="Int32" Nullable="false" />
+          <Property Name="balance" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tipo_cuenta" Relationship="Self.cuenta_contable_tipo_cuenta_id_fk" FromRole="cuenta_contable" ToRole="tipo_cuenta" />
+          <NavigationProperty Name="detalle_entrada_contable" Relationship="Self.detalle_entrada_contable_cuenta_contable_id_fk" FromRole="cuenta_contable" ToRole="detalle_entrada_contable" />
+        </EntityType>
+        <EntityType Name="detalle_entrada_contable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="entrada_contable_id" Type="Int32" Nullable="false" />
+          <Property Name="cuenta_contable_id" Type="Int32" Nullable="false" />
+          <Property Name="tipo_movimiento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="monto" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="cuenta_contable" Relationship="Self.detalle_entrada_contable_cuenta_contable_id_fk" FromRole="detalle_entrada_contable" ToRole="cuenta_contable" />
+          <NavigationProperty Name="entrada_contable" Relationship="Self.detalle_entrada_contable_entrada_contable_id_fk" FromRole="detalle_entrada_contable" ToRole="entrada_contable" />
+        </EntityType>
+        <EntityType Name="entrada_contable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="auxiliar_id" Type="Int32" Nullable="false" />
+          <Property Name="moneda_id" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="detalle_entrada_contable" Relationship="Self.detalle_entrada_contable_entrada_contable_id_fk" FromRole="entrada_contable" ToRole="detalle_entrada_contable" />
+        </EntityType>
+        <EntityType Name="monedaa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tasa" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_cuenta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="origen" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="cuenta_contable" Relationship="Self.cuenta_contable_tipo_cuenta_id_fk" FromRole="tipo_cuenta" ToRole="cuenta_contable" />
+        </EntityType>
+        <Association Name="cuenta_contable_tipo_cuenta_id_fk">
+          <End Role="tipo_cuenta" Type="Self.tipo_cuenta" Multiplicity="1" />
+          <End Role="cuenta_contable" Type="Self.cuenta_contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cuenta_contable">
+              <PropertyRef Name="tipo_cuenta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="detalle_entrada_contable_cuenta_contable_id_fk">
+          <End Role="cuenta_contable" Type="Self.cuenta_contable" Multiplicity="1" />
+          <End Role="detalle_entrada_contable" Type="Self.detalle_entrada_contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta_contable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_entrada_contable">
+              <PropertyRef Name="cuenta_contable_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="detalle_entrada_contable_entrada_contable_id_fk">
+          <End Role="entrada_contable" Type="Self.entrada_contable" Multiplicity="1" />
+          <End Role="detalle_entrada_contable" Type="Self.detalle_entrada_contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entrada_contable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_entrada_contable">
+              <PropertyRef Name="entrada_contable_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CONTABILIDAD2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="auxiliarr" EntityType="Self.auxiliarr" />
+          <EntitySet Name="cuenta_contable" EntityType="Self.cuenta_contable" />
+          <EntitySet Name="detalle_entrada_contable" EntityType="Self.detalle_entrada_contable" />
+          <EntitySet Name="entrada_contable" EntityType="Self.entrada_contable" />
+          <EntitySet Name="monedaa" EntityType="Self.monedaa" />
+          <EntitySet Name="tipo_cuenta" EntityType="Self.tipo_cuenta" />
+          <AssociationSet Name="cuenta_contable_tipo_cuenta_id_fk" Association="Self.cuenta_contable_tipo_cuenta_id_fk">
+            <End Role="tipo_cuenta" EntitySet="tipo_cuenta" />
+            <End Role="cuenta_contable" EntitySet="cuenta_contable" />
+          </AssociationSet>
+          <AssociationSet Name="detalle_entrada_contable_cuenta_contable_id_fk" Association="Self.detalle_entrada_contable_cuenta_contable_id_fk">
+            <End Role="cuenta_contable" EntitySet="cuenta_contable" />
+            <End Role="detalle_entrada_contable" EntitySet="detalle_entrada_contable" />
+          </AssociationSet>
+          <AssociationSet Name="detalle_entrada_contable_entrada_contable_id_fk" Association="Self.detalle_entrada_contable_entrada_contable_id_fk">
+            <End Role="entrada_contable" EntitySet="entrada_contable" />
+            <End Role="detalle_entrada_contable" EntitySet="detalle_entrada_contable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CONTABILIDAD2ModelStoreContainer" CdmEntityContainer="CONTABILIDAD2Entities">
+          <EntitySetMapping Name="auxiliarr">
+            <EntityTypeMapping TypeName="CONTABILIDAD2Model.auxiliarr">
+              <MappingFragment StoreEntitySet="auxiliarr">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cuenta_contable">
+            <EntityTypeMapping TypeName="CONTABILIDAD2Model.cuenta_contable">
+              <MappingFragment StoreEntitySet="cuenta_contable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="permite_transaccion" ColumnName="permite_transaccion" />
+                <ScalarProperty Name="tipo_cuenta_id" ColumnName="tipo_cuenta_id" />
+                <ScalarProperty Name="nivel" ColumnName="nivel" />
+                <ScalarProperty Name="cuenta_mayor" ColumnName="cuenta_mayor" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detalle_entrada_contable">
+            <EntityTypeMapping TypeName="CONTABILIDAD2Model.detalle_entrada_contable">
+              <MappingFragment StoreEntitySet="detalle_entrada_contable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="entrada_contable_id" ColumnName="entrada_contable_id" />
+                <ScalarProperty Name="cuenta_contable_id" ColumnName="cuenta_contable_id" />
+                <ScalarProperty Name="tipo_movimiento" ColumnName="tipo_movimiento" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="entrada_contable">
+            <EntityTypeMapping TypeName="CONTABILIDAD2Model.entrada_contable">
+              <MappingFragment StoreEntitySet="entrada_contable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="auxiliar_id" ColumnName="auxiliar_id" />
+                <ScalarProperty Name="moneda_id" ColumnName="moneda_id" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="monedaa">
+            <EntityTypeMapping TypeName="CONTABILIDAD2Model.monedaa">
+              <MappingFragment StoreEntitySet="monedaa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tasa" ColumnName="tasa" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_cuenta">
+            <EntityTypeMapping TypeName="CONTABILIDAD2Model.tipo_cuenta">
+              <MappingFragment StoreEntitySet="tipo_cuenta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="origen" ColumnName="origen" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

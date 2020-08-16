@@ -1,0 +1,56 @@
+﻿@model CONTABILIDAD2.entrada_contable
+
+@{
+    ViewBag.Title = "Eliminar entrada contable";
+}
+
+<h2>Eliminar entrada contable</h2>
+
+<h3>Esta seguro que desea eliminar esta entrada contable?</h3>
+<div>
+    <h4>entrada_contable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.auxiliar_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.auxiliar_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.moneda_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.moneda_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
