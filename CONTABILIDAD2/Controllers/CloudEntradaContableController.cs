@@ -1,26 +1,23 @@
-﻿using System;
+﻿using CONTABILIDAD2.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-using CONTABILIDAD2.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.Web;
+using System.Web.Mvc;
 
 namespace CONTABILIDAD2.Controllers
 {
-
-    public class EntradaContablesController : Controller
+    public class CloudEntradaContableController : Controller
     {
-
+        // GET: CloudEntradaContable
         string Baseurl = "http://intcontabilidad.azurewebsites.net/";
-        // GET: EntradaContables
         public async Task<ActionResult> Index()
         {
-            List<EntradaContable> EntradaContables = new List<EntradaContable>();
+             List<EntradaContable> EntradaContables = new List<EntradaContable>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
@@ -42,9 +39,6 @@ namespace CONTABILIDAD2.Controllers
 
             }
             return View(EntradaContables);
-
-
-           
         }
     }
 }

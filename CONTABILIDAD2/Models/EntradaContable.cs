@@ -5,6 +5,7 @@ using System.Web;
 
 namespace CONTABILIDAD2.Models
 {
+    [Serializable]
     public class EntradaContable
     {
         public int id { get; set; }
