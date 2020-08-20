@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CONTABILIDAD2.Models.Monedas>
+
+@{ ViewBag.Title = "TASA"; }
+
+<h2>Tasa Cambiaria Publica </h2>
+<br />
+<br />
+<p>
+
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        <th>
+            @Html.DisplayNameFor(model => model.codigoISO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaVigencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tasaCambio)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codigoISO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaVigencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tasaCambio)
+            </td>
+            <td>
+            </td>
+        </tr>
+}
+
+</table>

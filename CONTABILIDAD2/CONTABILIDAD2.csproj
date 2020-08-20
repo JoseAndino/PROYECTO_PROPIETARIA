@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,12 +44,23 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0-rc2-final\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.2.8\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -57,6 +69,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -174,13 +187,14 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuxiliarController.cs" />
-    <Compile Include="Controllers\CloudEntradaContableController.cs" />
     <Compile Include="Controllers\CuentaContableController.cs" />
+    <Compile Include="Controllers\CuentasContablesController.cs" />
     <Compile Include="Controllers\DetalleContableController.cs" />
     <Compile Include="Controllers\EntradaContableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
+    <Compile Include="Controllers\MonedasController.cs" />
     <Compile Include="Controllers\TipoCuentaController.cs" />
     <Compile Include="cuenta_contable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -210,9 +224,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\EntradaContable.cs" />
+    <Compile Include="Models\CuentaContable.cs" />
+    <Compile Include="Models\CuentaContableModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MonedaModel.cs" />
+    <Compile Include="Models\Monedas.cs" />
     <Compile Include="monedaa.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -325,7 +342,8 @@
     <Content Include="Views\TipoCuenta\Details.cshtml" />
     <Content Include="Views\TipoCuenta\Edit.cshtml" />
     <Content Include="Views\TipoCuenta\Index.cshtml" />
-    <Content Include="Views\CloudEntradaContable\Index.cshtml" />
+    <Content Include="Views\Monedas\Index.cshtml" />
+    <Content Include="Views\CuentasContables\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
